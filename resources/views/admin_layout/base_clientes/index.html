@@ -1,0 +1,57 @@
+<!--
+    @extends('admin_layout.index')
+    @section('admin_template')
+   
+    <div class="container-fluid">
+
+        
+        <h1 class="h3 mb-2 text-gray-800">Vigilantes</h1>
+        <p class="mb-4">Todos os vigilantes cadastrados</p>
+
+        <a href="{{ route('adm_vigilantes.incluir') }}" class="btn btn-primary mb-3">
+            Novo
+        </a>        
+
+       
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Vigilantes</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Celular</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                            <th>Opções</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($vigilantes as $linha)
+                                <tr>
+                                    <td>{{ $linha->id }}</td>
+                                    <td>{{ $linha->vigia_nome }}</td>
+                                    <td>{{ $linha->vigia_email }}</td>
+                                    <td>{{ $linha->vigia_celular }}</td>
+                                    <td>{{ $linha->cidade->cidade_nome }}</td>
+                                    <td>{{ $linha->estado->estado_nome }}</td>
+                                    <td>
+                                        Alterar
+                                        |
+                                        Excluir
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+@endsection
+
+-->

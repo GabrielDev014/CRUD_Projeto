@@ -1,0 +1,58 @@
+<!--
+    <?php
+
+        namespace App\Http\Controllers;
+        use Illuminate\Http\Request;
+
+        use App\Models\Vigilante;
+        use App\Models\Cidade;
+        use App\Models\Estado;
+
+        class VigilanteController extends Controller
+        {
+            public function index()
+            {
+                $vigilantes = Vigilante::where("vigia_ativo", "1")->with('cidade','estado')->get();
+                return view('ADM_vigilantes.index', compact('vigilantes'));
+            }
+
+            public function BuscarInclusao()
+            {
+                // Buscando os estados para o dropdown
+                $estados = Estado::where("estado_ativo", "1")->get();
+                $cidades = Cidade::where("cidade_ativo", "1")->get();
+
+                return view('ADM_vigilantes.incluir', compact('estados', 'cidades'));
+            }
+
+            public function salvarNovoVigilante(Request $request)
+            {
+                $request->validate([
+                    'id_estado' => 'required|exists:estado,id',
+                    'id_cidade' => 'required|exists:cidade,id',
+                    'vigia_nome' => 'required|string|max:255',
+                    'vigia_celular' => 'required|string|max:15',
+                    'vigia_email' => 'required|string|max:255',
+                    'vigia_senha' => 'required|string|max:20',
+                ]);
+
+                Vigilante::create($request->all());
+                                        //aqui é o apelido, quando chama o ROUTE
+                return redirect()->route('adm_vigilantes_index')->with('success', 'Vigilante criado com sucesso!');
+            }
+
+            // VigilanteController.php
+
+            public function buscarCidadesPorEstado($id_estado)
+            {
+                $cidades = Cidade::where('estado_id', $id_estado)->get();
+                return response()->json($cidades);
+            }
+
+
+        }
+
+    //Essa ROTAA é para quando o select de estado for selecionado, e então buscar as cidades
+    //Route::get('/cidades/{id_estado}', [VigilanteController::class, 'buscarCidadesPorEstado']);
+
+-->
